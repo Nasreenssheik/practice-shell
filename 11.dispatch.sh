@@ -9,4 +9,7 @@ go mod init dispatch
 go get
 go build
 cp /root/practice-shell/dispatch.service /etc/systemd/system/dispatch.service
-
+echo -e "\e[32m Enabling and starting the dispatch service\e[0m"
+systemctl daemon-reload
+systemctl enable dispatch
+systemctl restart dispatch

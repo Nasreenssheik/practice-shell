@@ -12,5 +12,5 @@ echo -e "\e[32m creating payment service file\e[0m"
 cp /root/practice-shell/payment.service /etc/systemd/system/payment.service
 echo -e "\e[32m Enabling and starting the payment service\e[0m"
 systemctl daemon-reload
-systemctl enable user
-systemctl restart user
+systemctl enable payment
+systemctl restart payment
