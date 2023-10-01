@@ -13,3 +13,7 @@ rm -rf cart.zip
 npm install
 echo -e "\e[32m creating cart service file\e[0m"
 cp /root/practice-shell/cart.service /etc/systemd/system/cart.service
+echo -e "\e[32m Enabling and starting the cart service\e[0m"
+systemctl daemon-reload
+systemctl enable cart
+systemctl restart cart
