@@ -12,7 +12,7 @@ unzip catalogue.zip
 rm -rf catalogue.zip
 npm install
 echo -e "\e[32m creating catalogue service file\e[0m"
-cp /root/practice-shell/catalogue.service /etc/system.d/system/catalogue.service
+cp /root/practice-shell/catalogue.service /etc/systemd/system/catalogue.service
 echo -e "\e[32m Downloading and installing the mongodb schema\e[0m"
 cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
 yum install mongodb-org-shell -y
