@@ -1,5 +1,5 @@
 echo -e "\e[32m Downloading Mongodb Repo\e[0m"
-cp /root/roboshop-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
+cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
 echo -e "\e[32m Installing Mongodb server\e[0m"
 yum install mongodb-org -y
 echo -e "\e[32m Changing the listen address\e[0m"
