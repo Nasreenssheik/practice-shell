@@ -6,18 +6,18 @@ echo -e "\e[32m Adding user and location\e[0m"
 useradd roboshop
 mkdir /app
 cd /app
-echo -e "\e[32m Downloading new app content and dependencies to catalogue server\e[0m"
+echo -e "\e[32m Downloading new app content and dependencies to user server\e[0m"
 curl -O https://roboshop-artifacts.s3.amazonaws.com/user.zip
 unzip user.zip
 rm -rf user.zip
 npm install
-echo -e "\e[32m creating catalogue service file\e[0m"
+echo -e "\e[32m creating user service file\e[0m"
 cp /root/practice-shell/user.service /etc/systemd/system/user.service
 echo -e "\e[32m Downloading and installing the mongodb schema\e[0m"
 cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
 yum install mongodb-org-shell -y
 mongo --host mongodb-dev.nasreen.cloud </app/schema/catalogue.js
-echo -e "\e[32m Enabling and starting the catalogue service\e[0m"
+echo -e "\e[32m Enabling and starting the user service\e[0m"
 systemctl daemon-reload
-systemctl enable catalogue
-systemctl restart catalogue
+systemctl enable user
+systemctl restart user
