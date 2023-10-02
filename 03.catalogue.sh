@@ -3,8 +3,8 @@ curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/catalogue.log
 echo -e "\e[32m Installing Nodejs server\e[0m"
 yum install nodejs -y &>>/tmp/catalogue.log
 echo -e "\e[32m Adding user and location\e[0m"
-useradd roboshop
-mkdir /app
+useradd roboshop &>>/tmp/catalogue.log
+mkdir /app &>>/tmp/catalogue.log
 cd /app
 echo -e "\e[32m Downloading new app content and dependencies to catalogue server\e[0m"
 curl -O https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/catalogue.log
