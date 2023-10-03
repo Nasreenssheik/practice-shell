@@ -7,7 +7,6 @@ echo -e "\e[33m Downloading new content to nginx server\e[0m"
 curl -O https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>/tmp/frontend.log
 unzip frontend.zip &>>/tmp/frontend.log
 rm -rf frontend.zip
-systemctl start nginx
 echo -e "\e[33m Configuring reverse proxy nginx server\e[0m"
 cp /root/practice-shell/roboshop.conf /etc/nginx/default.d/roboshop.conf
 echo -e "\e[33m enabling and starting nginx server\e[0m"
