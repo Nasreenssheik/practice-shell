@@ -1,3 +1,5 @@
+
+
 echo -e "\e[32m Disabiling Mysql default version\e[0m"
 yum module disable mysql -y &>>/tmp/mysql.log
 echo -e "\e[32m Setting up the MySQL5.7 repo file\e[0m"
