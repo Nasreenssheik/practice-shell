@@ -1,5 +1,5 @@
 color="\e[33m"
-noclor="$nocolor"
+noclor="\e[0m"
 logfile="/tmp/roboshop.log"
 
 echo -e "$color Downloading Mongodb Repo$nocolor"
