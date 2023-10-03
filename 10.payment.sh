@@ -7,8 +7,8 @@ echo -e "$color Installing python server$nocolor"
 yum install python36 gcc python3-devel -y &>>${logfile}
 echo -e "$color Adding user and location$nocolor"
 useradd roboshop &>>${logfile}
-mkdir /app &>>${logfile}
-cd /app
+mkdir ${lapp_path} &>>${logfile}
+cd ${lapp_path}
 echo -e "$color Downloading new app content and dependencies to payment server$nocolor"
 curl -O https://roboshop-artifacts.s3.amazonaws.com/payment.zip &>>/tmp/payment.log
 unzip payment.zip &>>${logfile}

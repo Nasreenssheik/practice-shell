@@ -1,19 +1,24 @@
-echo -e "\e[32m Installing golang server\e[0m"
-yum install golang -y &>>/tmp/dispatch.log
-echo -e "\e[32m Adding user and location\e[0m"
-useradd roboshop &>>/tmp/dispatch.log
-mkdir /app &>>/tmp/dispatch.log
-cd /app
-echo -e "\e[32m Downloading new app content,dependencies and building software to dispatch server\e[0m"
-curl -O https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip &>>/tmp/dispatch.log
-unzip dispatch.zip &>>/tmp/dispatch.log
-go mod init dispatch &>>/tmp/dispatch.log
-go get &>>/tmp/dispatch.log
-go build &>>/tmp/dispatch.log
-echo -e "\e[32m creating dispatch service file\e[0m"
+color="\e[32m"
+noclor="\e[0m"
+logfile="/tmp/roboshop.log"
+app_path="/app"
+
+echo -e "$color Installing golang server$nocolor"
+yum install golang -y &>>${logfile}
+echo -e "$color Adding user and location$nocolor"
+useradd roboshop &>>${logfile}
+mkdir ${app_path} &>>${logfile}
+cd ${app_path}
+echo -e "$color Downloading new app content,dependencies and building software to dispatch server$nocolor"
+curl -O https://roboshop-artifacts.s3.amazonaws.com/dispatch.zip &>>${logfile}
+unzip dispatch.zip &>>${logfile}
+go mod init dispatch &>>${logfile}
+go get &>>${logfile}
+go build &>>${logfile}
+echo -e "$color creating dispatch service file$nocolor"
 cp /root/practice-shell/dispatch.service /etc/systemd/system/dispatch.service
-echo -e "\e[32m Enabling and starting the dispatch service\e[0m"
+echo -e "$color Enabling and starting the dispatch service$nocolor"
 systemctl daemon-reload
-systemctl enable dispatch &>>/tmp/dispatch.log
+systemctl enable dispatch &>>${logfile}
 systemctl restart dispatch
 
