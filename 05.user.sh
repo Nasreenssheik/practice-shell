@@ -20,4 +20,4 @@ mongo --host mongodb-dev.nasreen.cloud </app/schema/user.js  &>>/tmp/user.log
 echo -e "\e[32m Enabling and starting the user service\e[0m"
 systemctl daemon-reload
 systemctl enable user &>>/tmp/user.log
-systemctl restart user
+systemctl restart
