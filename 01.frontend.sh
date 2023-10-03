@@ -1,6 +1,6 @@
 color="\e[33m"
 noclor="\e[0m"
-log_file="/tmp/frontend.log"
+log_file="/tmp/roboshop.log"
 
 echo -e "$color Installing Nginx Server$nocolor"
 yum install nginx -y &>>${logfile}
