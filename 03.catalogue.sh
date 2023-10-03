@@ -1,23 +1,27 @@
-echo -e "\e[32m Downloading Nodejs repo file\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>/tmp/catalogue.log
-echo -e "\e[32m Installing Nodejs server\e[0m"
-yum install nodejs -y &>>/tmp/catalogue.log
-echo -e "\e[32m Adding user and location\e[0m"
-useradd roboshop &>>/tmp/catalogue.log
-mkdir /app &>>/tmp/catalogue.log
+color="\e[33m"
+noclor="$nocolor"
+logfile="$logfile"
+
+echo -e "$color Downloading Nodejs repo file$nocolor"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$logfile
+echo -e "$color Installing Nodejs server$nocolor"
+yum install nodejs -y &>>$logfile
+echo -e "$color Adding user and location$nocolor"
+useradd roboshop &>>$logfile
+mkdir /app &>>$logfile
 cd /app
-echo -e "\e[32m Downloading new app content and dependencies to catalogue server\e[0m"
-curl -O https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>/tmp/catalogue.log
-unzip catalogue.zip &>>/tmp/catalogue.log
+echo -e "$color Downloading new app content and dependencies to catalogue server$nocolor"
+curl -O https://roboshop-artifacts.s3.amazonaws.com/catalogue.zip &>>$logfile
+unzip catalogue.zip &>>$logfile
 rm -rf catalogue.zip
-npm install &>>/tmp/catalogue.log
-echo -e "\e[32m creating catalogue service file\e[0m"
+npm install &>>$logfile
+echo -e "$color creating catalogue service file$nocolor"
 cp /root/practice-shell/catalogue.service /etc/systemd/system/catalogue.service
-echo -e "\e[32m Downloading and installing the mongodb schema\e[0m"
+echo -e "$color Downloading and installing the mongodb schema$nocolor"
 cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
-yum install mongodb-org-shell -y &>>/tmp/catalogue.log
-mongo --host mongodb-dev.nasreen.cloud </app/schema/catalogue.js &>>/tmp/catalogue.log
-echo -e "\e[32m Enabling and starting the catalogue service\e[0m"
+yum install mongodb-org-shell -y &>>$logfile
+mongo --host mongodb-dev.nasreen.cloud </app/schema/catalogue.js &>>$logfile
+echo -e "$color Enabling and starting the catalogue service$nocolor"
 systemctl daemon-reload
-systemctl enable catalogue &>>/tmp/catalogue.log
+systemctl enable catalogue &>>$logfile
 systemctl restart catalogue
