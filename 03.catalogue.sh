@@ -1,6 +1,6 @@
 color="\e[33m"
 noclor="$nocolor"
-logfile="$logfile"
+logfile="/tmp/roboshop.log"
 app_path="/app"
 
 echo -e "$color Downloading Nodejs repo file$nocolor"
