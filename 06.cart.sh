@@ -1,19 +1,23 @@
-echo -e "\e[32m Downloading Nodejs repo file\e[0m"
-curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>/tmp/cart.log
-echo -e "\e[32m Installing Nodejs server\e[0m"
-yum install nodejs -y &>>/tmp/cart.log
-echo -e "\e[32m Adding user and location\e[0m"
-useradd roboshop &>>/tmp/cart.log
-mkdir /app &>>/tmp/cart.log
+color="\e[32m"
+noclor="\e[0m"
+logfile="/tmp/roboshop.log"
+
+echo -e "$color Downloading Nodejs repo file$nocolor"
+curl -sL https://rpm.nodesource.com/setup_lts.x | bash  &>>${logfile}
+echo -e "$color Installing Nodejs server$nocolor"
+yum install nodejs -y &>>${logfile}
+echo -e "$color Adding user and location$nocolor"
+useradd roboshop &>>${logfile}
+mkdir /app &>>${logfile}
 cd /app
-echo -e "\e[32m Downloading new app content and dependencies to cart server\e[0m"
-curl -O https://roboshop-artifacts.s3.amazonaws.com/cart.zip &>>/tmp/cart.log
-unzip cart.zip &>>/tmp/cart.log
+echo -e "$color Downloading new app content and dependencies to cart server$nocolor"
+curl -O https://roboshop-artifacts.s3.amazonaws.com/cart.zip &>>${logfile}
+unzip cart.zip &>>${logfile}
 rm -rf cart.zip
-npm install &>>/tmp/cart.log
-echo -e "\e[32m creating cart service file\e[0m"
+npm install &>>${logfile}
+echo -e "$color creating cart service file$nocolor"
 cp /root/practice-shell/cart.service /etc/systemd/system/cart.service
-echo -e "\e[32m Enabling and starting the cart service\e[0m"
+echo -e "$color Enabling and starting the cart service$nocolor"
 systemctl daemon-reload
-systemctl enable cart &>>/tmp/cart.log
+systemctl enable cart &>>${logfile}
 systemctl restart cart
