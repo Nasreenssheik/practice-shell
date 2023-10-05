@@ -25,4 +25,4 @@ mongo --host mongodb-dev.nasreen.cloud <${app_path}/schema/user.js  &>>${logfile
 echo -e "$color Enabling and starting the user service$nocolor"
 systemctl daemon-reload
 systemctl enable user &>>${logfile}
-systemctl restart
+systemctl restart user
