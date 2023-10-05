@@ -15,7 +15,7 @@ unzip payment.zip &>>${logfile}
 pip3.6 install -r requirements.txt &>>${logfile}
 echo -e "$color creating payment service file$nocolor"
 cp /root/practice-shell/payment.service /etc/systemd/system/payment.service
-echo -e "$color Enabling and starting the payment service$nocolor}"
+echo -e "$color Enabling and starting the payment service$nocolor"
 systemctl daemon-reload
 systemctl enable payment &>>${logfile}
 systemctl restart payment
