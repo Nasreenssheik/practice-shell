@@ -10,7 +10,7 @@ useradd roboshop &>>${logfile}
 mkdir ${lapp_path} &>>${logfile}
 cd ${lapp_path}
 echo -e "$color Downloading new app content and dependencies to payment server$nocolor"
-curl -O https://roboshop-artifacts.s3.amazonaws.com/payment.zip &>>/tmp/payment.log
+curl -O https://roboshop-artifacts.s3.amazonaws.com/payment.zip &>>${logfile}
 unzip payment.zip &>>${logfile}
 pip3.6 install -r requirements.txt &>>${logfile}
 echo -e "$color creating payment service file$nocolor"
