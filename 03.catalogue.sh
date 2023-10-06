@@ -1,5 +1,5 @@
 source common.sh
 component=catalogue
 
-nodsjs
+nodejs
 mongo_schema
