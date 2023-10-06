@@ -10,8 +10,6 @@ echo -e "$color Installing mysql server$nocolor"
 yum install mysql-community-server -y &>>${logfile}
 echo -e "$color Changing default root password$nocolor"
 mysql_secure_installation --set-root-pass RoboShop@1 &>>${logfile}
-echo -e "$color Checking new password properly working or not$nocolor"
-mysql -uroot -pRoboShop@1 &>>${logfile}
 echo -e "$color Enabling and starting Mysql server$nocolor"
 systemctl enable mysqld &>>${logfile}
 systemctl restart mysqld
