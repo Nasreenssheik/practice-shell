@@ -30,19 +30,19 @@ app_start()
 mongo_schema()
 {
   echo -e "$color Downloading and installing the mongodb schema$nocolor"
-    cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
-    yum install mongodb-org-shell -y &>>$logfile
-    mongo --host mongodb-dev.nasreen.cloud <${app_path}/schema/${component}.js &>>$logfile
+  cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
+  yum install mongodb-org-shell -y &>>$logfile
+  mongo --host mongodb-dev.nasreen.cloud <${app_path}/schema/${component}.js &>>$logfile
 }
 
 service_start()
 {
   echo -e "$color creating ${component} service file$nocolor"
-    cp /root/practice-shell/${component}.service /etc/systemd/system/${component}.service
-    echo -e "$color Enabling and starting the ${component} service$nocolor"
-    systemctl daemon-reload
-    systemctl enable ${component} &>>$logfile
-    systemctl restart ${component}
+  cp /root/practice-shell/${component}.service /etc/systemd/system/${component}.service
+  echo -e "$color Enabling and starting the ${component} service$nocolor"
+  systemctl daemon-reload
+  systemctl enable ${component} &>>$logfile
+  systemctl restart ${component}
 }
 
 maven()
