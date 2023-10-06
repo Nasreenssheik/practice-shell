@@ -63,3 +63,13 @@ mysql_schema()
   yum install mysql -y &>>${logfile}
   mysql -h mysql-dev.nasreen.cloud -uroot -pRoboShop@1 < ${app_path}/schema/${component}.sql &>>${logfile}
 }
+
+python()
+{
+  echo -e "$color Installing python server$nocolor"
+  yum install python36 gcc python3-devel -y &>>${logfile}
+  app_start
+  echo -e "$color Downloadind dependencies for python server$nocolor"
+  pip3.6 install -r requirements.txt &>>${logfile}
+  service_start
+}
