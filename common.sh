@@ -44,3 +44,22 @@ service_start()
     systemctl enable ${component} &>>$logfile
     systemctl restart ${component}
 }
+
+maven()
+{
+  echo -e "$color Installing maven server$nocolor"
+  yum install maven -y &>>${logfile}
+  app_start
+  echo -e "$color Downloading dependencies and builiding application to ${component} server$nocolor"
+  mvn clean package &>>${logfile}
+  mv target/${component}-1.0.jar ${component}.jar &>>${logfile}
+  mysql_schema
+  service_start
+}
+
+mysql_schema()
+{
+  echo -e "$color Downloading and installing the mysql schema$nocolor"
+  yum install mysql -y &>>${logfile}
+  mysql -h mysql-dev.nasreen.cloud -uroot -pRoboShop@1 < ${app_path}/schema/${component}.sql &>>${logfile}
+}
