@@ -69,7 +69,19 @@ python()
   echo -e "$color Installing python server$nocolor"
   yum install python36 gcc python3-devel -y &>>${logfile}
   app_start
-  echo -e "$color Downloadind dependencies for python server$nocolor"
+  echo -e "$color Downloading dependencies for python server$nocolor"
   pip3.6 install -r requirements.txt &>>${logfile}
+  service_start
+}
+
+golang()
+{
+  echo -e "$color Installing golang server$nocolor"
+  yum install golang -y &>>${logfile}
+  app_start
+  echo -e "$color Downloading dependencies for golang server$nocolor"
+  go mod init dispatch &>>${logfile}
+  go get &>>${logfile}
+  go build &>>${logfile}
   service_start
 }
