@@ -1,11 +1,11 @@
 color="\e[33m"
-noclor="\e[0m"
+nocolor="\e[0m"
 logfile="/tmp/roboshop.log"
 app_path="/app"
 
 status_check()
 {
-  if [ $1 -eq 0 ];then
+  if [ $1 -eq 0 ] ;then
     echo success
     else
     echo failure
