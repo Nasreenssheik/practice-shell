@@ -5,7 +5,7 @@ app_path="/app"
 
 status_check()
 {
-  if [ $? -eq 0 ];then
+  if [ $1 -eq 0 ];then
     echo success
   else
     echo failure
@@ -19,10 +19,10 @@ nodejs()
 {
   echo -e "$color Downloading Nodejs repo file$nocolor"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$logfile
-  status_check
+  status_check $?
   echo -e "$color Installing Nodejs server$nocolor"
   yum install nodejs -y &>>$logfile
-  status_check
+  status_check $?
   app_start
   npm install &>>$logfile
   status_check
