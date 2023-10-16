@@ -36,6 +36,20 @@ nodejs()
   service_start
 }
 
+service_start()
+{
+  echo -e "$color CREATING ${component} SERVICE$nocolor"
+  cp /root/roboshop-shell/${component}.service /etc/systemd/system/${component}.service
+  status
+  echo -e "$color system reload THE ${component} SERVICE$nocolor"
+  systemctl daemon-reload
+  status
+  echo -e "$color ENABLEING AND STARTING THE ${component} SERVICE$nocolor"
+  systemctl enable ${component} &>>${logfile}
+  systemctl restart ${component}
+  status
+}
+
 app_start()
 {
   echo -e "$color Adding user and location$nocolor"
@@ -55,17 +69,6 @@ app_start()
 }
 
 mongo_schema()
-{
-  echo -e "$color Downloading and installing the mongodb schema$nocolor"
-  cp /root/practice-shell/mongodb.repo /etc/yum.repos.d/mongodb.repo
-  status_check
-  yum install mongodb-org-shell -y &>>$logfile
-  status_check
-  mongo --host mongodb-dev.nasreen.cloud <${app_path}/schema/${component}.js &>>$logfile
-  status_check
-}
-
-service_start()
 {
   echo -e "$color creating ${component} service file$nocolor"
   cp /root/practice-shell/${component}.service /etc/systemd/system/${component}.service
