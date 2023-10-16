@@ -3,23 +3,44 @@ noclor="\e[0m"
 logfile="/tmp/roboshop.log"
 app_path="/app"
 
+status_check()
+{
+  if [ $1 -eq 0 ];then
+    echo success
+    else
+    echo failure
+    exit 1
+  fi
+}
+
+
 
 nodejs()
 {
   echo -e "$color Downloading Nodejs repo file$nocolor"
   curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>$logfile
+  status_check
   echo -e "$color Installing Nodejs server$nocolor"
   yum install nodejs -y &>>$logfile
+  status_check
   app_start
   npm install &>>$logfile
+  status_check
   service_start
 }
 
 app_start()
 {
   echo -e "$color Adding user and location$nocolor"
+    id roboshop &>>$logfile
+    if [ $? -eq 0 ];then
     useradd roboshop &>>$logfile
+    fi
+    status_check
+    rm -rf ${app_path} &>>$logfile
+    status_check
     mkdir ${app_path} &>>$logfile
+    status_check
     cd ${app_path}
     echo -e "$color Downloading new app content and dependencies to ${component} server$nocolor"
     curl -O https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>$logfile
